@@ -61,7 +61,7 @@ app.get("/api/events", (req, res, next) => {
   const result = JSON.stringify(rows, getCircularReplacer());
 
   res.writeHead(200, { 'Content-Type': 'application/json' });
-res.send(rows);
+res.send(result);
 res.end();
  });
 
