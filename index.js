@@ -3,6 +3,7 @@ const http = require('http');
 var express = require("express");
 var app = express();
 const mysql = require('mysql')
+var CircularJSON = require('circular-json');
 
 var hard_coded_events = [['Bob','Online',0],
 ['Alice','Online',0],
