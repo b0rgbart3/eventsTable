@@ -43,7 +43,7 @@ connection.query('SELECT * FROM events', (error, rows) => {
 
   if (!error) {
     console.log(rows)
-    res.json(result);
+    res.json(rows);
   }
 });
 
