@@ -29,6 +29,7 @@ app.set('view engine', 'ejs')
 
 // Render Home Page
 app.get('/', function (req, res) {
+  connection.query('USE `heroku_55c92d829ae8baf`');
 
   connection.query('SELECT * FROM events', (error, rows) => {
     if (error) throw error;
