@@ -27,13 +27,12 @@ const connection = mysql.createConnection({
 
 connection.query('USE `heroku_55c92d829ae8baf`');
 
-rows = connection.query('SELECT * FROM events', (error, rows) => {
+connection.query('SELECT * FROM events', (error, rows) => {
   if (error) throw error;
 
   if (!error) {
     console.log(rows)
   }
-  return rows;
 });
 
 
@@ -61,7 +60,7 @@ app.get("/api/events", (req, res, next) => {
   // const result = JSON.stringify(rows, getCircularReplacer());
 
   res.writeHead(200, { 'Content-Type': 'application/json' });
-res.write(rows);
+res.json(rows);
 res.end();
  });
 
