@@ -45,23 +45,23 @@ app.get("/api/events", (req, res, next) => {
 
  
 
-  // const getCircularReplacer = () => {
-  //   const seen = new WeakSet();
-  //   return (key, value) => {
-  //     if (typeof value === 'object' && value !== null) {
-  //       if (seen.has(value)) {
-  //         return;
-  //       }
-  //       seen.add(value);
-  //     }
-  //     return value;
-  //   };
-  // };
+  const getCircularReplacer = () => {
+    const seen = new WeakSet();
+    return (key, value) => {
+      if (typeof value === 'object' && value !== null) {
+        if (seen.has(value)) {
+          return;
+        }
+        seen.add(value);
+      }
+      return value;
+    };
+  };
 
-  // const result = JSON.stringify(rows, getCircularReplacer());
+  const result = JSON.stringify(rows, getCircularReplacer());
 
   res.writeHead(200, { 'Content-Type': 'application/json' });
-res.json(rows);
+res.send(rows);
 res.end();
  });
 
