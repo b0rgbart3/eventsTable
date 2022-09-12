@@ -44,7 +44,7 @@ app.get("/api/events", (req, res, next) => {
     return rows;
   });
 
-  res.send(rows);
+  res.end(JSON.stringify(rows));
  });
 
 
