@@ -4,7 +4,7 @@ var express = require("express");
 var app = express();
 const mysql = require('mysql')
 
-var events = [['Bob','Online',0],
+var hard_coded_events = [['Bob','Online',0],
 ['Alice','Online',0],
 ['Bob','Touch',5],
 ['Bob','Start Call',10],
@@ -24,8 +24,19 @@ const connection = mysql.createConnection({
   database: process.env.DATABASE
 })
 
-// Render Home Page
-//app.get('/', function (req, res) {
+
+
+
+
+//})
+
+
+app.listen(3000, () => {
+ console.log("Server running on port 3000");
+});
+
+app.get("/api/events", (req, res, next) => {
+
   connection.query('USE `heroku_55c92d829ae8baf`');
 
   connection.query('SELECT * FROM events', (error, rows) => {
@@ -36,16 +47,7 @@ const connection = mysql.createConnection({
     }
 
   });
-
-//})
-
-
-app.listen(3000, () => {
- console.log("Server running on port 3000");
-});
-
-app.get("/api/events", (req, res, next) => {
-  res.json(events);
+  res.json(rows);
  });
 
 
