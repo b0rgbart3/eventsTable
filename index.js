@@ -47,7 +47,7 @@ app.get("/api/events", (req, res, next) => {
     }
     return rows;
   });
-  res(rows);
+  res.send(rows);
  });
 
 
