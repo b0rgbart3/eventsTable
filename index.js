@@ -31,21 +31,21 @@ app.listen(3000, () => {
  console.log("Server running on port 3000");
 });
 
-// app.get("/api/events", (req, res, next) => {
+app.get("/api/events", (req, res, next) => {
 
-//   connection.query('USE `heroku_55c92d829ae8baf`');
+  connection.query('USE `heroku_55c92d829ae8baf`');
 
-//   rows = connection.query('SELECT * FROM events', (error, rows) => {
-//     if (error) throw error;
+  rows = connection.query('SELECT * FROM events', (error, rows) => {
+    if (error) throw error;
 
-//     if (!error) {
-//       console.log(rows)
-//     }
-//     return rows;
-//   });
+    if (!error) {
+      console.log(rows)
+    }
+    return rows;
+  });
 
-//   res.send(rows);
-//  });
+  res.send(rows);
+ });
 
 
 
