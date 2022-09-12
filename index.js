@@ -47,7 +47,8 @@ app.get("/api/events", (req, res, next) => {
     }
     return rows;
   });
-  res.send(rows);
+  const str = CircularJSON.stringify(rows);
+  res.send(JSON.parse(str));
  });
 
 
