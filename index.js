@@ -27,12 +27,13 @@ const connection = mysql.createConnection({
 
 connection.query('USE `heroku_55c92d829ae8baf`');
 
-connection.query('SELECT * FROM events', (error, rows) => {
+rows = connection.query('SELECT * FROM events', (error, rows) => {
   if (error) throw error;
 
   if (!error) {
     console.log(rows)
   }
+  return rows;
 });
 
 
