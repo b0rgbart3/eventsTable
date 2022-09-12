@@ -25,7 +25,7 @@ const connection = mysql.createConnection({
 })
 
 // Render Home Page
-app.get('/', function (req, res) {
+//app.get('/', function (req, res) {
   connection.query('USE `heroku_55c92d829ae8baf`');
 
   connection.query('SELECT * FROM events', (error, rows) => {
@@ -35,9 +35,9 @@ app.get('/', function (req, res) {
       console.log(rows)
     }
 
-  })
+  });
 
-})
+//})
 
 
 app.listen(3000, () => {
