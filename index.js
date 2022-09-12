@@ -44,7 +44,9 @@ app.get("/api/events", (req, res, next) => {
     return rows;
   });
 
-  res.end(rows);
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+res.write(JSON.stringify(rows));
+res.end();
  });
 
 
