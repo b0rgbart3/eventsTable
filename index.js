@@ -26,46 +26,33 @@ const connection = mysql.createConnection({
 })
 
 
-
-
 app.listen(3000, () => {
  console.log("Server running on port 3000");
 });
 
 app.get("/api/events", (req, res, next) => {
-
- 
   connection.query('USE `heroku_55c92d829ae8baf`');
+  connection.query('SELECT * FROM events', (error, rows) => {
+    if (error) throw error;
 
-
-connection.query('SELECT * FROM events', (error, rows) => {
-  if (error) throw error;
-
-  if (!error) {
-    console.log(rows)
-    res.json(rows);
-  }
-});
-
-  // const getCircularReplacer = () => {
-  //   const seen = new WeakSet();
-  //   return (key, value) => {
-  //     if (typeof value === 'object' && value !== null) {
-  //       if (seen.has(value)) {
-  //         return;
-  //       }
-  //       seen.add(value);
-  //     }
-  //     return value;
-  //   };
-  // };
-
-  // const result = JSON.stringify(rows, getCircularReplacer());
-
-
-
+    if (!error) {
+      console.log(rows);
+      res.json(rows);
+    }
+  });
  });
 
+ app.get("/api/tasks", (req, res, next) => {
+  connection.query('USE `heroku_55c92d829ae8baf`');
+  connection.query('SELECT * FROM tasks', (error, rows) => {
+    if (error) throw error;
+
+    if (!error) {
+      console.log(rows)
+      res.json(rows);
+    }
+  });
+ });
 
 
 //For avoidong Heroku $PORT error
