@@ -24,9 +24,6 @@ const connection = mysql.createConnection({
   database: process.env.DATABASE
 })
 
-// View engine
-app.set('view engine', 'ejs')
-
 // Render Home Page
 app.get('/', function (req, res) {
   connection.query('USE `heroku_55c92d829ae8baf`');
@@ -36,7 +33,6 @@ app.get('/', function (req, res) {
 
     if (!error) {
       console.log(rows)
-      res.render('pages/index', { rows })
     }
 
   })
