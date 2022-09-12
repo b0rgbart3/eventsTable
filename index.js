@@ -30,7 +30,7 @@ app.set('view engine', 'ejs')
 // Render Home Page
 app.get('/', function (req, res) {
 
-  connection.query('SELECT * FROM user WHERE id = "1"', (error, rows) => {
+  connection.query('SELECT * FROM events', (error, rows) => {
     if (error) throw error;
 
     if (!error) {
