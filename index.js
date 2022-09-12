@@ -3,7 +3,7 @@ const http = require('http');
 var express = require("express");
 var app = express();
 const mysql = require('mysql')
-const {parse, stringify, toJSON, fromJSON} = require('flatted');
+// const {parse, stringify, toJSON, fromJSON} = require('flatted');
 
 var hard_coded_events = [['Bob','Online',0],
 ['Alice','Online',0],
@@ -44,7 +44,7 @@ app.get("/api/events", (req, res, next) => {
     return rows;
   });
 
-  res.send(stringify(rows));
+  res.send(rows);
  });
 
 
