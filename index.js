@@ -2,12 +2,26 @@ const http = require('http');
 
 var express = require("express");
 var app = express();
+
+var events = [['Bob','Online',0],
+['Alice','Online',0],
+['Bob','Touch',5],
+['Bob','Start Call',10],
+['Alice','Touch',10],
+['Bob','Stop Call',20],
+['Alice','Start Call',20],
+['Bob','Offline',30],
+['Alice','Stop Call',40],
+['Bob','Online',40],
+['Alice','Offline',50]];
+
+
 app.listen(3000, () => {
  console.log("Server running on port 3000");
 });
 
-app.get("/api/data", (req, res, next) => {
-  res.json(["Tony","Lisa","Michael","Ginger","Food"]);
+app.get("/api/events", (req, res, next) => {
+  res.json(events);
  });
 
 
