@@ -17,25 +17,14 @@ var hard_coded_events = [['Bob','Online',0],
 ['Bob','Online',40],
 ['Alice','Offline',50]];
 
-// // Connection Details
-// const connection = mysql.createConnection({
-//   host: process.env.DB_HOST,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASSWORD,
-//   database: process.env.DATABASE
-// })
+// Connection Details
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DATABASE
+})
 
-var MysqlJson = require('mysql-json');
-var mysqlJson = new MysqlJson({
-  host:process.env.DB_HOST,
-  user:process.env.DB_USER,
-  password:process.env.DB_PASSWORD,
-  database:process.env.DATABASE
-});
-
-
-
-//})
 
 
 app.listen(3000, () => {
@@ -44,27 +33,19 @@ app.listen(3000, () => {
 
 app.get("/api/events", (req, res, next) => {
 
-  mysqlJson.query("SELECT * FROM events", function(err, response) {
-    if (err) throw err;
-    console.log(response);
+  connection.query('USE `heroku_55c92d829ae8baf`');
+
+  rows = connection.query('SELECT * FROM events', (error, rows) => {
+    if (error) throw error;
+
+    if (!error) {
+      console.log(rows)
+    }
+    return rows;
   });
 
-
-  // connection.query('USE `heroku_55c92d829ae8baf`');
-
-  // rows = connection.query('SELECT * FROM events', (error, rows) => {
-  //   if (error) throw error;
-
-  //   if (!error) {
-  //     console.log(rows)
-  //   }
-  //   return rows;
-  // });
-
-  // res.send(stringify(rows));
+  res.send(stringify(rows));
  });
-
-
 
 
 
