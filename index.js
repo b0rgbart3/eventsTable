@@ -25,16 +25,7 @@ const connection = mysql.createConnection({
   database: process.env.DATABASE
 })
 
-connection.query('USE `heroku_55c92d829ae8baf`');
 
-rows = connection.query('SELECT * FROM events', (error, rows) => {
-  if (error) throw error;
-
-  if (!error) {
-    console.log(rows)
-  }
-  return rows;
-});
 
 
 app.listen(3000, () => {
@@ -44,23 +35,34 @@ app.listen(3000, () => {
 app.get("/api/events", (req, res, next) => {
 
  
+  connection.query('USE `heroku_55c92d829ae8baf`');
 
-  const getCircularReplacer = () => {
-    const seen = new WeakSet();
-    return (key, value) => {
-      if (typeof value === 'object' && value !== null) {
-        if (seen.has(value)) {
-          return;
-        }
-        seen.add(value);
-      }
-      return value;
-    };
-  };
 
-  const result = JSON.stringify(rows, getCircularReplacer());
+connection.query('SELECT * FROM events', (error, rows) => {
+  if (error) throw error;
 
-res.json(result);
+  if (!error) {
+    console.log(rows)
+    res.json(result);
+  }
+});
+
+  // const getCircularReplacer = () => {
+  //   const seen = new WeakSet();
+  //   return (key, value) => {
+  //     if (typeof value === 'object' && value !== null) {
+  //       if (seen.has(value)) {
+  //         return;
+  //       }
+  //       seen.add(value);
+  //     }
+  //     return value;
+  //   };
+  // };
+
+  // const result = JSON.stringify(rows, getCircularReplacer());
+
+
 
  });
 
