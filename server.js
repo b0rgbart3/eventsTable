@@ -1,5 +1,5 @@
 const http = require('http');
-
+const path = require('node:path');
 var express = require("express");
 var app = express();
 const mysql = require('mysql')
@@ -25,14 +25,22 @@ const connection = mysql.createConnection({
   database: process.env.DATABASE
 })
 
+console.log('user: ', process.env.DB_USER);
+console.log('host: ', process.env.DB_HOST);
 
 app.listen(3000, () => {
  console.log("Server running on port 3000");
 });
 
 app.get("/api/events", (req, res, next) => {
+
+
   connection.query('USE `heroku_55c92d829ae8baf`');
   connection.query('SELECT * FROM events', (error, rows) => {
+
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  
     if (error) throw error;
 
     if (!error) {
@@ -54,18 +62,18 @@ app.get("/api/events", (req, res, next) => {
   });
  });
 
+ app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "./build/index.html"));
+});
 
 //For avoidong Heroku $PORT error
-app.set('port', (process.env.PORT || 5000));
-app.get('/', function(request, response) {
-    var result = 'App is running'
-    response.send(result);
-}).listen(
+// app.set('port', (process.env.PORT || 5000));
+// app.get('/', function(request, response) {
+//     var result = 'App is running'
+//     response.send(result);
+// }).listen(
   
-  app.get('port'), function() {
-    console.log('App is running, server is listening on port ', app.get('port'));
-});
+//   app.get('port'), function() {
+//     console.log('App is running, server is listening on port ', app.get('port'));
+// });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build"));
-});

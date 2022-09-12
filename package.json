@@ -4,11 +4,7 @@
   "description": "take-home-challenge",
   "main": "carecoach_api.js",
   "scripts": {
-    "start": "react-scripts start",
-    "serve": "npx nodemon --exec npx babel-node src/server.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node server.js"
   },
   "author": "Bart Dority",
   "license": "ISC",
@@ -18,11 +14,7 @@
   "dependencies": {
     "body-parser": "^1.20.0",
     "express": "^4.18.1",
-    "mysql": "^2.18.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3"
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
