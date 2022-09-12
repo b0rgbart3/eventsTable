@@ -3,7 +3,7 @@ const http = require('http');
 var express = require("express");
 var app = express();
 const mysql = require('mysql')
-var CircularJSON = require('circular-json');
+const {parse, stringify, toJSON, fromJSON} = require('flatted');
 
 var hard_coded_events = [['Bob','Online',0],
 ['Alice','Online',0],
@@ -48,8 +48,8 @@ app.get("/api/events", (req, res, next) => {
     }
     return rows;
   });
-  const str = CircularJSON.stringify(rows);
-  res.send(JSON.parse(str));
+
+  res.send(stringify(rows));
  });
 
 
