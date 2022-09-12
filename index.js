@@ -44,8 +44,23 @@ app.get("/api/events", (req, res, next) => {
     return rows;
   });
 
+  const getCircularReplacer = () => {
+    const seen = new WeakSet();
+    return (key, value) => {
+      if (typeof value === 'object' && value !== null) {
+        if (seen.has(value)) {
+          return;
+        }
+        seen.add(value);
+      }
+      return value;
+    };
+  };
+
+  const result = JSON.stringify(rows, getCircularReplacer());
+
   res.writeHead(200, { 'Content-Type': 'application/json' });
-res.write(JSON.stringify(rows));
+res.write(result);
 res.end();
  });
 
