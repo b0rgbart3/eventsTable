@@ -19,7 +19,7 @@ var hard_coded_events = [['Bob','Online',0],
 
 // Connection Details
 
-const localhost = false;
+const localhost = true;
 var dbhost;
 var dbuser;
 var dbpass;
