@@ -5,20 +5,67 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carecoach</title>
+    <style>
+        body {
+            background-color:rgba(220,230,240,.58);
+        }
+        #events {
+         background-color:white;
+         border-radius:8px;
+        }
+        .row {
+            display:flex;
+        }
+
+        .row div {
+            padding:4px;
+            flex-grow: 1;
+            max-width:30%;
+            border-bottom: 1px dashed gray;
+        }
+    </style>
 </head>
 <script>
 
     const livePath = '/https://powerful-eyrie-50564.herokuapp.com/api/events'; 
+    const localPath = '';
+    const host = localPath;
 
-
-        fetch('/https://powerful-eyrie-50564.herokuapp.com/api/events/api/events')
-        .then((data) => {
-
-            console.log(data);
+    fetch(host + '/api/events')
+        .then(async (response) => {
+            if (response.status === 200) {
+                let data = await response.text();
+                // handle data
+                displayEvents(data);
+            }
+          
         }).catch(err => console.error(err));
+
+    function displayEvents(data) {
+        data = JSON.parse(data);
+        var handle = document.getElementById('events');
+        data.forEach((datum) => {
+            
+            eventRow = document.createElement("div");
+            eventRow.classList.add("row");
+            datumDiv = document.createElement("div");
+            datumDiv.textContent = datum.device;
+            eventRow.append(datumDiv);
+            datumDiv = document.createElement("div");
+            datumDiv.textContent = datum.event;
+            eventRow.append(datumDiv);
+            datumDiv = document.createElement("div");
+            datumDiv.textContent = datum.timestamp;
+            eventRow.append(datumDiv);
+            handle.append(eventRow);
+        })
+    }
 </script>
 <body>
     <h1>Carecoach</h1>
+    <div>EVENTS:</div>
+    <div id="events">
+    </div>
 
 </body>
 </html>

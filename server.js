@@ -18,15 +18,34 @@ var hard_coded_events = [['Bob','Online',0],
 ['Alice','Offline',50]];
 
 // Connection Details
+
+const localhost = false;
+var dbhost;
+var dbuser;
+var dbpass;
+var db;
+
+if (localhost) {
+  dbhost = process.env.CARECOACH_DB_HOST;
+  dbuser = process.env.CARECOACH_DB_USER;
+  dbpass = process.env.CARECOACH_DB_PASS;
+  db = process.env.CARECOACH_DB;
+} else {
+  dbhost = process.env.DB_HOST;
+  dbuser = process.env.DB_USER;
+  dbpass = process.env.DB_PASS;
+  db = process.env.DATABASE;
+}
+
 const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DATABASE
+  host: dbhost,
+  user: dbuser,
+  password: dbpass,
+  database: db
 })
 
-console.log('user: ', process.env.DB_USER);
-console.log('host: ', process.env.DB_HOST);
+console.log('user: ', dbuser);
+console.log('host: ', dbhost);
 
 app.listen(3000, () => {
  console.log("Server running on port 3000");
